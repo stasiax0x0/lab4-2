@@ -59,6 +59,15 @@ $ python3 lab4-2_banner.py scanner.nmap.org 22
     Banner (HTTP probe):
     SSH-2.0-OpenSSH_7.4
 
+    Service: OpenSSH (Secure Shell)
+    Version: 7.4
+    Protocol: SSH version 2.0
+
+    Security Analysis:
+        Good: Using modern SSH protocol (v2.0)
+        Concerning: OpenSSH 7.4 was released in 2016, so it's old
+        Potential Issues: Older versions may have known vulnerabilities
+
 $ python3 lab4-2_banner.py scanner.nmap.org 80
     Banner (HTTP probe):
     HTTP/1.1 403 Forbidden
@@ -81,10 +90,24 @@ $ python3 lab4-2_banner.py scanner.nmap.org 80
     <address>Apache/2.4.6 (CentOS) Server at example Port 80</address>
     </body></html>
 
+    Service: Apache web server
+    Version: 2.4.6
+    Operating System: CentOS
+    Response: 403 Forbidden (you're blocked from accessing the root page)
+
+    Security Analysis:
+        Good: Server properly rejects unauthorized access
+        Concerning: Apache 2.4.6 was released in 2013, so it's old
+        Information Leak: Reveals exact OS and server version
+        The 403 Error: This is good security, it's denying access
+
 
 PHASE 5 
 $ python3 udp_probe_simple.py 1.1.1.1 53
 {'host': '1.1.1.1', 'port': 53, 'reply': None, 'elapsed': None}
 
-$ python3 udp_probe_simple.py 1.1.11 53 "0000010000010000000000000377777706676f6f676c6503636f6d0000010001"
-{'host': '1.1.11', 'port': 53, 'reply': None, 'elapsed': None}
+$ python3 udp_probe_simple.py 1.1.1.1 53 "0000010000010000000000000377777706676f6f676c6503636f6d0000010001"
+{'host': '1.1.1.1', 'port': 53, 'reply': '0000818000010006000000000377777706676f6f676c6503636f6d0000010001
+c00c000100010000005200048efa8193c00c000100010000005200048efa8163c00c000100010000005200048efa8167c00c000100
+010000005200048efa8168c00c000100010000005200048efa8169c00c000100010000005200048efa816a', 
+'elapsed': 0.0031321048736572266}

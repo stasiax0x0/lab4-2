@@ -1,8 +1,13 @@
 $ python3 udp_probe_simple.py 1.1.1.1 53
 {'host': '1.1.1.1', 'port': 53, 'reply': None, 'elapsed': None}
 
-$ python3 udp_probe_simple.py 1.1.11 53 "0000010000010000000000000377777706676f6f676c6503636f6d0000010001"
-{'host': '1.1.11', 'port': 53, 'reply': None, 'elapsed': None}
+No reply was received from this probe 
 
-No replies was received from either probe 
+$ python3 udp_probe_simple.py 1.1.1.1 53 "0000010000010000000000000377777706676f6f676c6503636f6d0000010001"
+{'host': '1.1.1.1', 'port': 53, 'reply': '0000818000010006000000000377777706676f6f676c6503636f6d0000010001
+c00c000100010000005200048efa8193c00c000100010000005200048efa8163c00c000100010000005200048efa8167c00c000100
+010000005200048efa8168c00c000100010000005200048efa8169c00c000100010000005200048efa816a', 
+'elapsed': 0.0031321048736572266}
+
+This is a successful reply from the second probe
 This is what was sent in the second probe decoded from hex: wwwgooglecom

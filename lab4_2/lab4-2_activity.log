@@ -36,7 +36,7 @@ $ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 30 --ti
 Scan complete in 4.76s — 2 open ports found
 Wrote results to scan_results.json
 
-Increasing the workers --> the scan completes faster, but too many workers can overwhelm the targets
+Increasing the workers --> the scan completes faster, but too many workers can overwhelm the targets. Workers are the number of processes/threads used to perform the scan at the same time.
 $ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 50 --timeout 1.0
 Scan complete in 2.93s — 2 open ports found
 $ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 100 --timeout 1.0
@@ -52,3 +52,39 @@ $ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 100 --t
 Scan complete in 1.52s — 2 open ports found
 $ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 30 --timeout 10.0
 Scan complete in 4.71s — 2 open ports found
+
+
+PHASE 4
+$ python3 lab4-2_banner.py scanner.nmap.org 22
+    Banner (HTTP probe):
+    SSH-2.0-OpenSSH_7.4
+
+$ python3 lab4-2_banner.py scanner.nmap.org 80
+    Banner (HTTP probe):
+    HTTP/1.1 403 Forbidden
+    Date: Mon, 10 Nov 2025 15:24:54 GMT
+    Server: Apache/2.4.6 (CentOS)
+    Content-Length: 393
+    Connection: close
+    Content-Type: text/html; charset=iso-8859-1
+
+    <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+    <html><head>
+    <title>403 Forbidden</title>
+    </head><body>
+    <h1>Forbidden</h1>
+    <p>You don't have permission to access /
+    on this server.</p>
+    <p>Additionally, a 403 Forbidden
+    error was encountered while trying to use an ErrorDocument to handle the request.</p>
+    <hr>
+    <address>Apache/2.4.6 (CentOS) Server at example Port 80</address>
+    </body></html>
+
+
+PHASE 5 
+$ python3 udp_probe_simple.py 1.1.1.1 53
+{'host': '1.1.1.1', 'port': 53, 'reply': None, 'elapsed': None}
+
+$ python3 udp_probe_simple.py 1.1.11 53 "0000010000010000000000000377777706676f6f676c6503636f6d0000010001"
+{'host': '1.1.11', 'port': 53, 'reply': None, 'elapsed': None}

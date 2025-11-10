@@ -1,0 +1,54 @@
+PHASE 1
+
+OPEN PORTS
+port: 22
+    Connected to scanme.nmap.org:22
+    Elapsed: 0.15s
+port: 80
+    Connected to scanme.nmap.org:80
+    Elapsed: 0.14s
+
+CLOSED PORTS
+port:443
+    Socket error: [Errno 111] Connection refused
+    Elapsed: 0.14s
+port: 21
+    Socket error: [Errno 111] Connection refused
+    Elapsed: 0.15s
+port: 8080
+    Socket error: [Errno 111] Connection refused
+    Elapsed: 0.14s
+
+PHASE 2
+
+scanme.nmap.org:22 is OPEN. --> this means there's an ssh service runni8ng and accepting connections
+
+All these are closed, meaning the server is saying there's no service here. This is a good security practise.
+scanme.nmap.org:9999 is CLOSED (refused)
+scanme.nmap.org:53 is CLOSED (refused)
+scanme.nmap.org:143 is CLOSED (refused)
+scanme.nmap.org:993 is CLOSED (refused)
+scanme.nmap.org:995 is CLOSED (refused)
+
+PHASE 3
+
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 30 --timeout 1.0
+Scan complete in 4.76s — 2 open ports found
+Wrote results to scan_results.json
+
+Increasing the workers --> the scan completes faster, but too many workers can overwhelm the targets
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 50 --timeout 1.0
+Scan complete in 2.93s — 2 open ports found
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 100 --timeout 1.0
+Scan complete in 1.54s — 2 open ports found
+
+
+Increasing the timeout --> nothing really changes
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 30 --timeout 3.0
+Scan complete in 4.76s — 2 open ports found
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 50 --timeout 3.0
+Scan complete in 2.90s — 2 open ports found
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 100 --timeout 3.0
+Scan complete in 1.52s — 2 open ports found
+$ python lab4-2_scan.py --host scanme.nmap.org --ports 20-1024 --workers 30 --timeout 10.0
+Scan complete in 4.71s — 2 open ports found
